@@ -1,7 +1,6 @@
 # Importing the libraries
 import pandas as pd
 from sklearn.preprocessing import Imputer
-from sklearn.preprocessing import LabelEncoder, OneHotEncoder
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
 
@@ -16,12 +15,16 @@ imputer = imputer.fit(X[:, 1:3])
 X[:, 1:3] = imputer.transform(X[:, 1:3])
 
 # Encoding categorical data
+from sklearn.preprocessing import LabelEncoder, OneHotEncoder
+
+# Encoding Independant Variable
 labelencoder_X = LabelEncoder()
 X[:, 0] = labelencoder_X.fit_transform(X[:, 0])
 
 onehotencoder = OneHotEncoder(categorical_features = [0])
 X = onehotencoder.fit_transform(X).toarray()
 
+# Encoding Dependant Variable
 labelencoder_y = LabelEncoder()
 y = labelencoder_y.fit_transform(y)
 
